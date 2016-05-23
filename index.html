@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Zen from GitHub</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+    <link rel="stylesheet" href="app.min.css">
+    <style>
+      /* TODO */
+      /* Egen CSS hamnar här */
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.3/jquery.min.js"></script>  
+  </head>
+
+  <body>
+    <div class="app-page" data-page="home">
+      <div class="app-topbar">
+        <div class="app-title">Talk to an API!</div>
+      </div>
+      <div class="app-content">
+        <div class="app-section">
+          <div class="app-button" id="getButton">Get Zen from GitHub!</div>
+        </div>
+        <div class="app-section">
+            <p id="showResponse">Zen from GitHub will show here!</p>
+        </div>
+      </div>
+    </div>
+
+    <script src="app.min.js"></script>
+    <script>
+      App.controller('home', function (page) {
+        // Kod som ska köras när sidan "home" laddats in
+        $(page).find("#getButton").click(function() { 
+            // AJAX
+            $.get("https://api.github.com/zen", function(data, status, jqXHR) {
+            $("#showResponse").text(data);
+            } ) 
+            
+        } )
+      });
+
+      try {
+        App.restore();
+      } catch (err) {
+        App.load('home');
+      }
+    </script>
+  </body>
+</html>
